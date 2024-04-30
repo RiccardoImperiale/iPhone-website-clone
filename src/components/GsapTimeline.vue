@@ -5,7 +5,7 @@ export default {
     name: 'GsapTimeline',
     data() {
         return {
-            isPlaying: true, // Initially set to true to start the animation
+            isPlaying: true,
         };
     },
     mounted() {
