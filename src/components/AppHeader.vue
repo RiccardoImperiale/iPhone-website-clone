@@ -18,8 +18,8 @@ export default {
         <a v-for="link in navItems" href="#">{{ link }}</a>
       </div>
       <div class="nav_icons">
-        <img width="16" src="/public/assets/images/search.svg" alt="search">
-        <img width="16" src="/public/assets/images/bag.svg" alt="cart">
+        <img width="18" src="/public/assets/images/search.svg" alt="search">
+        <img width="18" src="/public/assets/images/bag.svg" alt="cart">
       </div>
     </nav>
   </header>
@@ -30,12 +30,13 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 50px;
+  height: 60px;
 
   .nav_links {
     display: flex;
-    gap: 2rem;
-    font-size: .85rem;
+    gap: 2.5rem;
+    font-size: .9rem;
+
   }
 
   .nav_icons {
