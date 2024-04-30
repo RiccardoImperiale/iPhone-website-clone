@@ -1,6 +1,7 @@
 :root {
   --apple-darker: black;
   --apple-lighter: white;
+  --apple-gray-800: rgb(39, 39, 39);
   --apple-gray-500: gray;
   --apple-gray-100: #e2e4e7;
   --apple-gray-200: #ababab;
