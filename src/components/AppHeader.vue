@@ -2,13 +2,45 @@
 
 export default {
   name: 'AppHeader',
+  data() {
+    return {
+      navItems: ['Store', 'Mac', 'iPhone', 'Support']
+    }
+  },
 };
 </script>
 
 <template>
   <header>
-    <nav></nav>
+    <nav class="container">
+      <img src="/public/assets/images/apple.svg" alt="">
+      <div class="nav_links">
+        <a v-for="link in navItems" href="#">{{ link }}</a>
+      </div>
+      <div class="nav_icons">
+        <img width="16" src="/public/assets/images/search.svg" alt="search">
+        <img width="16" src="/public/assets/images/bag.svg" alt="cart">
+      </div>
+    </nav>
   </header>
 </template>
 
-<style></style>
+<style>
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.25rem 0;
+
+  .nav_links {
+    display: flex;
+    gap: 2rem;
+    font-size: .85rem;
+  }
+
+  .nav_icons {
+    & img:first-child {
+      margin-right: 1.5rem;
+    }
+  }
+}
+</style>
