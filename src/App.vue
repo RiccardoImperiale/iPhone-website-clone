@@ -1,37 +1,25 @@
 <script>
-import GsapFrom from './components/GsapFrom.vue';
-import GsapFromTo from './components/GsapFromTo.vue';
-import GsapScrollTrigger from './components/GsapScrollTrigger.vue';
-import GsapStagger from './components/GsapStagger.vue';
-import GsapText from './components/GsapText.vue';
-import GsapTimeline from './components/GsapTimeline.vue';
-import GsapTo from './components/GsapTo.vue'
+import AppHeader from './components/AppHeader.vue';
+import AppHero from './components/AppHero.vue';
+import AppHighlights from './components/AppHighlights.vue';
+
 
 export default {
   name: 'App',
   components: {
-    GsapTo,
-    GsapFrom,
-    GsapFromTo,
-    GsapTimeline,
-    GsapStagger,
-    GsapScrollTrigger,
-    GsapText
+    AppHeader,
+    AppHero,
+    AppHighlights
   }
 }
 </script>
 
 <template>
   <main>
-
-    <GsapText />
-
+    <AppHeader />
+    <AppHero />
+    <AppHighlights />
   </main>
 </template>
 
-<style>
-main {
-  display: flex;
-  gap: 2rem;
-}
-</style>
+<style></style>
