@@ -1,6 +1,7 @@
 <script>
 import GsapFrom from './components/GsapFrom.vue';
 import GsapFromTo from './components/GsapFromTo.vue';
+import GsapScrollTrigger from './components/GsapScrollTrigger.vue';
 import GsapStagger from './components/GsapStagger.vue';
 import GsapTimeline from './components/GsapTimeline.vue';
 import GsapTo from './components/GsapTo.vue'
@@ -12,7 +13,8 @@ export default {
     GsapFrom,
     GsapFromTo,
     GsapTimeline,
-    GsapStagger
+    GsapStagger,
+    GsapScrollTrigger
   }
 }
 </script>
@@ -23,7 +25,7 @@ export default {
     <!-- <GsapFrom /> -->
     <!-- <GsapFromTo /> -->
     <!-- <GsapTimeline /> -->
-    <GsapStagger />
+    <GsapScrollTrigger />
 
   </main>
 </template>
