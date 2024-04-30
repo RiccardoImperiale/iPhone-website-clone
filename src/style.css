@@ -2,6 +2,9 @@
   --apple-darker: black;
   --apple-lighter: white;
   --apple-gray-500: gray;
+  --apple-gray-100: #e2e4e7;
+  --apple-gray-200: #ababab;
+  --apple-gray-300: #878787;
 }
 
 * {
@@ -31,6 +34,18 @@ a {
   max-width: 1440px;
   margin: auto;
 }
+
+.btn {
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  background-color: rgb(0, 165, 248);
+  border-radius: 20px;
+  color: var(--apple-gray-100);
+}
+
 
 /* body {
   color: white;

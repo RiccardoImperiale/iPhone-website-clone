@@ -7,7 +7,7 @@ export default {
 
 <template>
   <div class="highlights">
-
+    fsfasd
   </div>
 </template>
 

@@ -29,7 +29,8 @@ export default {
 nav {
   display: flex;
   justify-content: space-between;
-  padding: 1.25rem 0;
+  align-items: center;
+  height: 50px;
 
   .nav_links {
     display: flex;
