@@ -44,16 +44,39 @@ export default {
             ]
         }
     },
-    mounted() {
+    methods: {
+        playNextVideo(index) {
+            // Play the next video if it's not the last one
+            if (index < this.hightlightsSlides.length - 1) {
+                const nextVideo = this.$refs[`video-${index + 1}`][0];
+                nextVideo.play();
+            }
+
+            if (index < this.hightlightsSlides.length - 1) {
+                const cardWidth = this.$refs[`video-${index + 1}`][0].parentElement.offsetWidth;
+                const translation = `-${(index + 1) * (cardWidth + 80)}px`; // current width - gap
+
+                gsap.to(this.$refs.carousel, {
+                    x: translation,
+                    duration: 1.5,
+                    ease: 'power3.inOut'
+                });
+            }
+        }
     },
+    mounted() {
+        // Start playing the first video when mounted
+        const firstVideo = this.$refs['video-0'][0];
+        firstVideo.play();
+    }
 };
 </script>
 
 <template>
     <div class="carousel">
-        <div class="cards container">
-            <div v-for="video in hightlightsSlides" class="card" :key="video.id">
-                <video playsInline preload="auto" muted>
+        <div ref="carousel" class="cards container">
+            <div v-for="(video, index) in hightlightsSlides" class="card" :key="video.id">
+                <video playsInline preload="auto" muted :ref="`video-${index}`" @ended="playNextVideo(index)">
                     <source :src="video.video" type="video/mp4">
                 </video>
                 <div class="card_text">
@@ -76,10 +99,10 @@ export default {
 <style scoped>
 .carousel {
     overflow-x: hidden;
-    margin-top: 2rem;
+    margin: 3rem 0;
 
     .cards {
-        gap: 3rem;
+        gap: 5rem;
         height: 100%;
         display: flex;
         transform: translateX(0%);
@@ -117,7 +140,7 @@ export default {
     gap: 1rem;
     justify-content: center;
     align-items: center;
-    margin-top: 2rem;
+    padding-top: 3rem;
 
     .progress,
     .reset {

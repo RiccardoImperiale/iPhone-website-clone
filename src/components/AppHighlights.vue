@@ -29,7 +29,6 @@ export default {
                 <a class="link" href="#">Watch the event</a>
             </div>
         </div>
-
         <VideoCarousel />
     </section>
 </template>
@@ -40,7 +39,7 @@ export default {
     overflow: hidden;
     height: 100%;
     background-color: #101010;
-    padding: 5rem 0;
+    padding: 8rem 0;
 
     .top {
         display: flex;
