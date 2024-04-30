@@ -40,7 +40,7 @@ export default {
   </section>
 </template>
 
-<style>
+<style scoped>
 #hero {
   display: flex;
   flex-direction: column;
