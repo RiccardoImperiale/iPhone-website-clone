@@ -54,6 +54,9 @@ export default {
                 nextVideo.play();
                 this.currentVideoIndex++;
 
+                const texts = document.querySelectorAll('.card_text')
+                gsap.to(texts[this.currentVideoIndex], { x: '0px', opacity: 1, duration: 1, delay: 0.5 });
+
                 const progBars = document.querySelectorAll('.progress_bar')
                 const firstVideoDuration = this.hightlightsSlides[index].videoDuration * 1000;
                 gsap.to(progBars[this.currentVideoIndex], { width: '100%', duration: firstVideoDuration / 1000 });
@@ -70,6 +73,7 @@ export default {
             const firstVideo = this.$refs['video-0'][0];
             firstVideo.play();
             this.playing = true;
+            gsap.to(this.$refs.text0, { x: '0px', opacity: 1, duration: 1, delay: 0.5 });
 
             const progBars = document.querySelectorAll('.progress_bar')
             const firstVideoDuration = this.hightlightsSlides[this.currentVideoIndex].videoDuration * 1000;
@@ -80,6 +84,9 @@ export default {
 
             const progBars = document.querySelectorAll('.progress_bar');
             progBars.forEach(bar => gsap.set(bar, { width: 0 }));
+
+            const texts = document.querySelectorAll('.card_text')
+            texts.forEach(text => gsap.set(text, { x: '-320px', opacity: 0 }))
 
             this.start();
             this.currentVideoIndex = 0;
@@ -101,10 +108,29 @@ export default {
         },
         dotWidth(index) {
             return index === this.currentVideoIndex && this.playing ? '100px' : '12px';
+        },
+        initIntersectionObserver() {
+            const options = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.start();
+                        observer.disconnect();
+                    }
+                });
+            }, options);
+
+            const carouselElement = this.$refs.carousel;
+            observer.observe(carouselElement);
         }
     },
     mounted() {
-        this.start()
+        this.initIntersectionObserver();
     }
 };
 </script>
@@ -116,7 +142,7 @@ export default {
                 <video playsInline preload="auto" muted :ref="`video-${index}`" @ended="playNextVideo(index)">
                     <source :src="video.video" type="video/mp4">
                 </video>
-                <div class="card_text">
+                <div :ref="'text' + index" class="card_text">
                     <p v-for="text in video.textLists">{{ text }}</p>
                 </div>
             </div>
@@ -179,6 +205,8 @@ export default {
         position: absolute;
         line-height: 2.5rem;
         font-size: 1.25rem;
+        opacity: 0;
+        transform: translateX(-320px);
     }
 }
 
@@ -219,7 +247,6 @@ export default {
             top: 0;
             left: 0;
             width: 0%;
-            /* transform: scaleX(0); */
             height: 12px;
             background-color: var(--apple-lighter);
             border-radius: 6px;
