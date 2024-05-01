@@ -14,7 +14,8 @@ export default {
         ScrollTrigger.create({
             trigger: this.$refs.title,
             start: 'top bottom-=150px',
-            end: 'top bottom-=150px',
+            // end: 'top bottom-=150px',
+            end: '+=100',
             scrub: true,
             onEnter: () => {
                 gsap.to(this.$refs.title, {
@@ -87,7 +88,6 @@ export default {
     overflow: hidden;
     height: 100%;
     background-color: #101010;
-    padding: 8rem 0;
 
     .top {
         display: flex;

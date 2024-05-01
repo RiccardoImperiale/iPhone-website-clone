@@ -9,7 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tresjs/cientos": "^3.8.0",
+    "@tresjs/core": "^3.9.0",
     "gsap": "^3.12.5",
+    "three": "^0.164.1",
+    "three-gltf-loader": "^1.111.0",
     "vue": "^3.4.21"
   },
   "devDependencies": {

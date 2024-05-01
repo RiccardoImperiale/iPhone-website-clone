@@ -1,5 +1,7 @@
 <script>
 import { gsap } from 'gsap';
+import { TextPlugin } from 'gsap/TextPlugin';
+gsap.registerPlugin(TextPlugin)
 
 export default {
   name: 'AppHero',
@@ -29,7 +31,7 @@ export default {
 
 <template>
   <section id="hero">
-    <span ref="text_title" class="text_title">iPhone 15 Pro</span>
+    <span ref="text_title" class="text_title"></span>
     <video autoplay muted playsInline :key="videoSrc">
       <source :src="videoSrc ? '/assets/videos/' + videoSrc : ''" type="video/mp4" />
     </video>

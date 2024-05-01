@@ -169,7 +169,7 @@ export default {
 
 .carousel {
     overflow-x: hidden;
-    margin: 3rem 0;
+    margin-top: 3rem;
 
     .cards {
         gap: 5rem;

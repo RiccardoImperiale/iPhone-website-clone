@@ -2,6 +2,7 @@
 import AppHeader from './components/AppHeader.vue';
 import AppHero from './components/AppHero.vue';
 import AppHighlights from './components/AppHighlights.vue';
+import AppModel from './components/AppModel.vue';
 
 
 export default {
@@ -9,7 +10,8 @@ export default {
   components: {
     AppHeader,
     AppHero,
-    AppHighlights
+    AppHighlights,
+    AppModel
   }
 }
 </script>
@@ -19,6 +21,7 @@ export default {
     <AppHeader />
     <AppHero />
     <AppHighlights />
+    <AppModel />
   </main>
 </template>
 
