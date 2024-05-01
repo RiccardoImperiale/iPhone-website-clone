@@ -31,7 +31,7 @@ export default {
   <section id="hero">
     <span ref="text_title" class="text_title">iPhone 15 Pro</span>
     <video autoplay muted playsInline :key="videoSrc">
-      <source :src="videoSrc ? '/public/assets/videos/' + videoSrc : ''" type="video/mp4" />
+      <source :src="videoSrc ? '/assets/videos/' + videoSrc : ''" type="video/mp4" />
     </video>
     <div ref="cta" id="cta">
       <a href="#highlights" class="btn">Buy</a>

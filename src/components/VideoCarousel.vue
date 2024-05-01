@@ -42,28 +42,27 @@ export default {
                     videoDuration: 3.63,
                 },
             ],
-            playing: false, // Track if any video is playing
-            paused: false, // Track animation state
-            currentVideoIndex: 0 // Track the index of the current video
+            playing: false,
+            paused: false,
+            currentVideoIndex: 0,
         }
     },
     methods: {
         playNextVideo(index) {
-            // Play the next video if it's not the last one
             if (index < this.hightlightsSlides.length - 1) {
                 const nextVideo = this.$refs[`video-${index + 1}`][0];
                 nextVideo.play();
                 this.currentVideoIndex++;
+
+                const progBars = document.querySelectorAll('.progress_bar')
+                const firstVideoDuration = this.hightlightsSlides[index].videoDuration * 1000;
+                gsap.to(progBars[this.currentVideoIndex], { width: '100%', duration: firstVideoDuration / 1000 });
+
                 const cardWidth = this.$refs[`video-${index + 1}`][0].parentElement.offsetWidth;
                 const translation = `-${(index + 1) * (cardWidth + 80)}px`; // current width - gap
+                gsap.to(this.$refs.carousel, { x: translation, duration: 1.5, ease: 'power1.inOut' });
 
-                gsap.to(this.$refs.carousel, {
-                    x: translation,
-                    duration: 1.5,
-                    ease: 'power1.inOut'
-                });
             } else {
-                // All videos have finished playing
                 this.playing = false;
             }
         },
@@ -71,44 +70,40 @@ export default {
             const firstVideo = this.$refs['video-0'][0];
             firstVideo.play();
             this.playing = true;
+
+            const progBars = document.querySelectorAll('.progress_bar')
+            const firstVideoDuration = this.hightlightsSlides[this.currentVideoIndex].videoDuration * 1000;
+            gsap.to(progBars[0], { width: '100%', duration: firstVideoDuration / 1000 });
         },
         restart() {
-            gsap.to(this.$refs.carousel, {
-                x: 0,
-                ease: 'power1.inOut'
-            });
+            gsap.to(this.$refs.carousel, { x: 0, duration: 1, ease: 'power1.inOut' });
+
+            const progBars = document.querySelectorAll('.progress_bar');
+            progBars.forEach(bar => gsap.set(bar, { width: 0 }));
 
             this.start();
-            this.currentVideoIndex = 0; // Reset the current video index
+            this.currentVideoIndex = 0;
             this.paused = false;
         },
         togglePause() {
-
             this.paused = !this.paused;
 
-            // Pause or resume videos
             const currentVideo = this.$refs[`video-${this.currentVideoIndex}`][0];
             if (currentVideo) {
-                if (this.paused) {
-                    currentVideo.pause();
-                } else {
-                    currentVideo.play();
-                }
+                this.paused ? currentVideo.pause() : currentVideo.play();
             }
 
-            // Pause or resume animation
             gsap.globalTimeline.paused(this.paused);
         },
         stopCurrentVideo() {
-            // Get the reference to the current video element
             const currentVideo = this.$refs[`video-${this.currentVideoIndex}`][0];
-            if (currentVideo) {
-                currentVideo.pause(); // Pause the current video
-            }
+            currentVideo && currentVideo.pause();
+        },
+        dotWidth(index) {
+            return index === this.currentVideoIndex && this.playing ? '100px' : '12px';
         }
     },
     mounted() {
-        // Start playing the first video when mounted
         this.start()
     }
 };
@@ -128,10 +123,10 @@ export default {
         </div>
         <div class="controls">
             <div class="progress">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
+                <div v-for="(video, index) in hightlightsSlides" :key="video.id" :style="{ width: dotWidth(index) }"
+                    class="dot">
+                    <div ref="progressBars" class="progress_bar"></div>
+                </div>
             </div>
             <div v-if="!playing" @click="restart" class="control_btn">
                 <img width="30" src="/assets/images/replay.svg" alt="">
@@ -201,7 +196,6 @@ export default {
     }
 
     .progress {
-        /* width: 160px; */
         height: 60px;
         display: flex;
         align-items: center;
@@ -211,9 +205,24 @@ export default {
         .dot {
             width: 12px;
             height: 12px;
-            border-radius: 50%;
-            background-color: var(--apple-gray-200);
+            border-radius: 12px;
+            background-color: var(--apple-gray-300);
             margin: 0 .5rem;
+
+            position: relative;
+            overflow: hidden;
+            transition: .25s;
+        }
+
+        .progress_bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            /* transform: scaleX(0); */
+            height: 12px;
+            background-color: var(--apple-lighter);
+            border-radius: 6px;
         }
     }
 

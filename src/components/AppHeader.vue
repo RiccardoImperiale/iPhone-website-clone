@@ -13,13 +13,13 @@ export default {
 <template>
   <header>
     <nav class="container">
-      <img src="/public/assets/images/apple.svg" alt="">
+      <img src="/assets/images/apple.svg" alt="">
       <div class="nav_links">
         <a v-for="link in navItems" href="#">{{ link }}</a>
       </div>
       <div class="nav_icons">
-        <img width="18" src="/public/assets/images/search.svg" alt="search">
-        <img width="18" src="/public/assets/images/bag.svg" alt="cart">
+        <img width="18" src="/assets/images/search.svg" alt="search">
+        <img width="18" src="/assets/images/bag.svg" alt="cart">
       </div>
     </nav>
   </header>
