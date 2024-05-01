@@ -1,7 +1,5 @@
 <script>
 import { gsap } from 'gsap';
-import { TextPlugin } from 'gsap/TextPlugin';
-gsap.registerPlugin(TextPlugin)
 
 export default {
   name: 'AppHero',
@@ -12,7 +10,7 @@ export default {
     }
   },
   mounted() {
-    gsap.to(this.$refs.text_title, { opacity: 1, delay: 2 });
+    gsap.to(this.$refs.textTitle, { opacity: 1, delay: 2 });
     gsap.to(this.$refs.cta, { opacity: 1, y: -50, delay: 2 });
 
     this.checkScreenWidth();
@@ -31,7 +29,7 @@ export default {
 
 <template>
   <section id="hero">
-    <span ref="text_title" class="text_title"></span>
+    <span ref="textTitle" class="text_title">iPhone 15 Pro</span>
     <video autoplay muted playsInline :key="videoSrc">
       <source :src="videoSrc ? '/assets/videos/' + videoSrc : ''" type="video/mp4" />
     </video>

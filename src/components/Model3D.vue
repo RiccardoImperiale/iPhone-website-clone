@@ -1,25 +1,27 @@
-<script>
-import { TresCanvas } from '@tresjs/core'
-import { OrbitControls } from '@tresjs/cientos'
+<script setup>
+import { TresCanvas } from '@tresjs/core';
+import { OrbitControls } from '@tresjs/cientos';
 
-export default {
-    name: 'Model3D',
-    components: {
-        OrbitControls,
-        TresCanvas
-    },
-};
+import IphoneModel from './IphoneModel.vue';
+
+
 </script>
 
+
 <template>
-    <TresCanvas>
-        <TresPerspectiveCamera :args="[45, 1, 0.1, 1000]" />
-        <OrbitControls :enableZoom="false" />
-        <TresMesh>
-            <TresTorusGeometry :args="[1, 0.5, 16, 32]" />
-            <TresMeshBasicMaterial color="orange" />
-        </TresMesh>
+    <TresCanvas preset="realistic">
+        <TresPerspectiveCamera :position="[0, 0, 1]" :look-at="[0, 0, 0]" />
+        <OrbitControls :enableZoom="false" :rotateSpeed="0.5" :dampingFactor="0.05" />
+        <Suspense>
+            <IphoneModel :scale="4" />
+        </Suspense>
         <TresAmbientLight :intensity="1" />
+        <TresDirectionalLight cast-shadow :position="[10, 0, 0]" :intensity="2" />
+
+        <!-- Additional lights -->
+        <TresDirectionalLight :position="[-10, -10, -10]" :intensity="0.5" />
+        <TresDirectionalLight :position="[0, 10, -10]" :intensity="0.5" />
+        <TresDirectionalLight :position="[0, -10, 10]" :intensity="0.5" />
     </TresCanvas>
 </template>
 

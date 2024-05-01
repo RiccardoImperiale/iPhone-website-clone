@@ -38,7 +38,7 @@ export default {
 
 .model {
     width: 100%;
-    height: 600px;
+    height: 800px;
 }
 
 .bottom {
