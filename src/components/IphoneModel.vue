@@ -1,7 +1,7 @@
 <script setup>
 import { useGLTF } from '@tresjs/cientos'
 import { ref, onMounted } from 'vue';
-const { scene, nodes, materials } = await useGLTF('/models/scene.glb', { draco: true })
+const { scene, materials } = await useGLTF('/models/scene.glb', { draco: true })
 
 
 const cameraNotch = ref(null);
@@ -19,29 +19,14 @@ const fret1 = ref(null);
 const fret2 = ref(null);
 const fret3 = ref(null);
 
+let col = 'black';
 
-let color = 'blue'
-
-const black = {
-    col1: '#454749',
-    col2: '#000000',
+const colors = {
+    black: { col1: '#454749', col2: '#000000', },
+    yellow: { col1: '#8F8A81', col2: '#282721', },
+    blue: { col1: '#53596E', col2: '#101028', },
+    white: { col1: '#C9C8C2', col2: '#282721', }
 }
-
-const yellow = {
-    col1: '#8F8A81',
-    col2: '#282721',
-}
-
-const blue = {
-    col1: '#53596E',
-    col2: '#21242e',
-}
-
-const white = {
-    col1: '#C9C8C2',
-    col2: '#282721',
-}
-
 
 // Get the material after the component is mounted
 onMounted(() => {
@@ -60,25 +45,23 @@ onMounted(() => {
     fret2.value = materials['jlzuBkUzuJqgiAK'];
     fret3.value = materials['HGhEhpqSBZRnjHC'];
 
-
-    // Set the color of the material
-    if (color === 'black') {
-        setColor(black);
+    if (col === 'black') {
+        setColor(colors.black);
     }
 
-    if (color === 'yellow') {
-        setColor(yellow);
+    if (col === 'yellow') {
+        setColor(colors.yellow);
     }
 
-    if (color === 'blue') {
-        setColor(blue);
+    if (col === 'blue') {
+        setColor(colors.blue);
     }
 
-    if (color === 'white') {
-        setColor(white);
+    if (col === 'white') {
+        setColor(colors.white);
     }
-
 });
+
 
 const setColor = (newColor) => {
     cameraNotch.value.color.set(newColor.col2);
@@ -96,7 +79,6 @@ const setColor = (newColor) => {
     fret2.value.color.set(newColor.col2);
     fret3.value.color.set(newColor.col2);
 };
-
 
 </script>
 
