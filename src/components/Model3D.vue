@@ -1,26 +1,16 @@
-<script>
+<script setup>
+import { ref } from 'vue';
 import { TresCanvas } from '@tresjs/core';
 import { OrbitControls } from '@tresjs/cientos';
-
+import { store } from '../store.js';
 import IphoneModel from './IphoneModel.vue';
 
-export default {
-    components: {
-        IphoneModel,
-        OrbitControls,
-        TresCanvas
-    },
-    data() {
-        return {
-            phoneColor: ''
-        }
-    },
-    methods: {
-        changeColor(col) {
-            this.phoneColor = col;
-        }
-    },
-}
+const phoneColor = ref('blue');
+
+const changeColor = (col) => {
+    store.phoneColor = col;
+};
+
 </script>
 
 <template>

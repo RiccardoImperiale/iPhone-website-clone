@@ -1,8 +1,8 @@
 <script setup>
 import { useGLTF } from '@tresjs/cientos'
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
+import { store } from '../store.js'
 const { scene, materials } = await useGLTF('/models/scene.glb', { draco: true })
-
 
 const cameraNotch = ref(null);
 const dispBorder = ref(null);
@@ -19,7 +19,12 @@ const fret1 = ref(null);
 const fret2 = ref(null);
 const fret3 = ref(null);
 
-let col = 'black';
+let col = store.phoneColor;
+
+watch(() => store.phoneColor, (newColor) => {
+    col = newColor;
+    setColor(colors[col]);
+});
 
 const colors = {
     black: { col1: '#454749', col2: '#000000', },
@@ -28,8 +33,8 @@ const colors = {
     white: { col1: '#C9C8C2', col2: '#282721', }
 }
 
-// Get the material after the component is mounted
 onMounted(() => {
+
     cameraNotch.value = materials['ujsvqBWRMnqdwPx'];
     dispBorder.value = materials['zFdeDaGNRwzccye'];
     screen.value = materials['pIJKfZsazmcpEiU'];
