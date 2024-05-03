@@ -34,7 +34,6 @@ const colors = {
 }
 
 onMounted(() => {
-
     cameraNotch.value = materials['ujsvqBWRMnqdwPx'];
     dispBorder.value = materials['zFdeDaGNRwzccye'];
     screen.value = materials['pIJKfZsazmcpEiU'];
