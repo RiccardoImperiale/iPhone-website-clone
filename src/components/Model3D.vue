@@ -1,11 +1,7 @@
 <script setup>
-import { ref } from 'vue';
-import { store } from '../store.js'
 import { TresCanvas } from '@tresjs/core';
 import { OrbitControls } from '@tresjs/cientos';
 import IphoneModel from './IphoneModel.vue';
-
-const iphoneModelRef = ref(null);
 
 </script>
 
@@ -15,8 +11,7 @@ const iphoneModelRef = ref(null);
         <OrbitControls ref="orbitControlsRef" :enableZoom="false" :rotateSpeed="0.5" :enableDamping="true"
             :dampingFactor="0.1" />
         <Suspense>
-            <IphoneModel :rotation="[store.modelRotation['x'], store.modelRotation['y'], store.modelRotation['z']]"
-                ref="iphoneModelRef" :scale="4" />
+            <IphoneModel :rotation="[0, 0, 0]" ref="iphoneModelRef" :scale="4" />
         </Suspense>
         <TresAmbientLight :intensity="1" />
         <TresDirectionalLight cast-shadow :position="[10, 0, 0]" :intensity="2" />

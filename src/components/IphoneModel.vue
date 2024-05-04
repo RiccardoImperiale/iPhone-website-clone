@@ -26,9 +26,9 @@ watch(() => store.phoneColor, (newColor) => {
 
 const colors = {
     black: { col1: '#454749', col2: '#000000', },
-    yellow: { col1: '#8F8A81', col2: '#282721', },
-    blue: { col1: '#53596E', col2: '#101028', },
-    white: { col1: '#C9C8C2', col2: '#282721', }
+    yellow: { col1: '#8F8A81', col2: '#0a0906', },
+    blue: { col1: '#53596E', col2: '#04051D', },
+    white: { col1: '#C9C8C2', col2: '#000000', }
 }
 
 onMounted(() => {
@@ -49,7 +49,6 @@ onMounted(() => {
 
     setColor(colors[store.phoneColor]);
 })
-
 
 const setColor = (newColor) => {
     cameraNotch.value.color.set(newColor.col2);

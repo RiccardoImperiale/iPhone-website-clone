@@ -63,10 +63,8 @@ const changeSize = (size) => {
     selectedSize.value = size;
     animateSizeCircle(size, sizeCircle.value);
     animatePhoneSizes(size, iPhone_lg.value.$el, iPhone_sm.value.$el);
-    store.resetOrbit = true;
-    // store.modelRotation = { x: 0, y: 0, z: 0 }
-    // console.log(store.modelRotation);
-    // size === 'small' ? store.size = 4 : store.size = 4.6;
+    // store.resetRot = !store.resetRot
+    // console.log(store.resetRot);
 };
 
 
@@ -83,7 +81,6 @@ const selectedSizeClass = computed(() => (size) => {
         </div>
         <div class="bottom">
             <div ref="models_wrapper" class="models_wrapper">
-
                 <div ref="model" class="model">
                     <div class="iPhone">
                         <Model3D ref="iPhone_sm" class="iPhone_sm" />
@@ -92,7 +89,6 @@ const selectedSizeClass = computed(() => (size) => {
                         <Model3D ref="iPhone_lg" class="iPhone_lg" />
                     </div>
                 </div>
-
             </div>
             <div class="model_name">{{ modelName }}</div>
             <div class="controls">
@@ -151,12 +147,14 @@ const selectedSizeClass = computed(() => (size) => {
         height: 100%;
         position: absolute;
         cursor: grab;
+        /* transform: rotate3d(2, 2, 1) */
     }
 
     .iPhone_sm {
         scale: 1;
         transform: translateX(100%);
         z-index: 3;
+
     }
 
     .iPhone_lg {
