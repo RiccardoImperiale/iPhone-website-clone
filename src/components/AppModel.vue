@@ -1,8 +1,12 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import Model3D from './Model3D.vue';
 import { store } from '../store.js'
 import { gsap } from 'gsap';
+
+import ScrollTrigger from 'gsap/ScrollTrigger'; // Import ScrollTrigger
+
+gsap.registerPlugin(ScrollTrigger);
 
 const modelName = ref('iPhone 15 Pro in Black Titanium');
 const selectedModel = ref(true);
@@ -11,6 +15,58 @@ const selectedSize = ref('large');
 const sizeCircle = ref(null);
 const iPhone_sm = ref(null);
 const iPhone_lg = ref(null);
+const title = ref(null);
+const model = ref(null);
+const models_wrapper = ref(null);
+
+onMounted(() => {
+    ScrollTrigger.create({
+        trigger: title.value,
+        start: 'top bottom-=150px',
+        end: 'top bottom+=100',
+        scrub: true,
+        onEnter: () => {
+            gsap.to(title.value, {
+                opacity: 1,
+                duration: .5,
+                y: 0,
+                ease: 'power1.inOut'
+            });
+        },
+        onLeaveBack: () => {
+            gsap.to(title.value, {
+                opacity: 0,
+                duration: .5,
+                y: 100,
+                ease: 'power1.inOut'
+            });
+        },
+    })
+
+    ScrollTrigger.create({
+        trigger: models_wrapper.value,
+        start: 'top bottom+=90%',
+        end: 'top bottom+=65%',
+        scrub: true,
+        onEnter: () => {
+            gsap.to(models_wrapper.value, {
+                opacity: 1,
+                y: '0%',
+                duration: 1,
+                ease: 'power2.inOut'
+            });
+        },
+        onLeaveBack: () => {
+            gsap.to(models_wrapper.value, {
+                opacity: 0,
+                y: '100%',
+                duration: 1,
+                ease: 'power1.inOut'
+            });
+        },
+    })
+
+})
 
 const changeModel = (col, title, id) => {
     store.phoneColor = col;
@@ -23,7 +79,10 @@ const changeSize = (size) => {
     selectedSize.value = size;
     animateSizeCircle(size);
     animatePhoneSizes(size);
-    size === 'small' ? store.size = 4 : store.size = 4.6;
+    store.resetOrbit = true;
+    // store.modelRotation = { x: 0, y: 0, z: 0 }
+    // console.log(store.modelRotation);
+    // size === 'small' ? store.size = 4 : store.size = 4.6;
 };
 
 const animateSizeCircle = (size) => {
@@ -102,16 +161,20 @@ const selectedSizeClass = computed(() => (size) => {
 <template>
     <section id="3d_model" class="container">
         <div class="top">
-            <div class="titled" ref="title">Take a closer look.</div>
+            <div class="title" ref="title">Take a closer look.</div>
         </div>
         <div class="bottom">
-            <div class="model">
-                <div class="iPhone">
-                    <Model3D ref="iPhone_sm" class="iPhone_sm" />
+            <div ref="models_wrapper" class="models_wrapper">
+
+                <div ref="model" class="model">
+                    <div class="iPhone">
+                        <Model3D ref="iPhone_sm" class="iPhone_sm" />
+                    </div>
+                    <div class="iPhone">
+                        <Model3D ref="iPhone_lg" class="iPhone_lg" />
+                    </div>
                 </div>
-                <div class="iPhone">
-                    <Model3D ref="iPhone_lg" class="iPhone_lg" />
-                </div>
+
             </div>
             <div class="model_name">{{ modelName }}</div>
             <div class="controls">
@@ -141,12 +204,21 @@ const selectedSizeClass = computed(() => (size) => {
 </template>
 
 <style scoped>
-.titled {
-    /* opacity: 0; */
-    /* transform: translateY(100px); */
+.title {
     color: var(--apple-gray-500);
     font-size: 3.75rem;
     font-weight: 500;
+}
+
+.models_wrapper {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(100%);
 }
 
 .model {
@@ -160,12 +232,13 @@ const selectedSizeClass = computed(() => (size) => {
         width: 100%;
         height: 100%;
         position: absolute;
+        cursor: grab;
     }
 
     .iPhone_sm {
         scale: 1;
         transform: translateX(100%);
-        z-index: 1;
+        z-index: 3;
     }
 
     .iPhone_lg {
@@ -191,6 +264,7 @@ const selectedSizeClass = computed(() => (size) => {
     gap: .85rem;
     justify-content: center;
     align-items: center;
+    z-index: 3;
 
     .progress,
     .control_btn {

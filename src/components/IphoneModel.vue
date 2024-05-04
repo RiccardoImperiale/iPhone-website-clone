@@ -55,10 +55,10 @@ const setColor = (newColor) => {
     cameraNotch.value.color.set(newColor.col2);
     dispBorder.value.color.set(newColor.col2);
     screen.value.color.set(newColor.col2);
-    cameras.value.color.set(newColor.col1);
+    // cameras.value.color.set(newColor.col1);
     flashBorder.value.color.set(newColor.col1);
     lato.value.color.set(newColor.col1);
-    slot.value.color.set(newColor.col2);
+    slot.value.color.set(newColor.col1);
     back.value.color.set(newColor.col1);
     back2.value.color.set(newColor.col1);
     back3.value.color.set(newColor.col1);
