@@ -1,18 +1,45 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import Model3D from './Model3D.vue';
 import { store } from '../store.js'
+import { gsap } from 'gsap';
 
-const phoneColor = ref('');
 const modelName = ref('iPhone 15 Pro in Black Titanium');
 const selectedModel = ref(true);
 const currentId = ref(2);
+const selectedSize = ref('large');
+const sizeCircle = ref(null);
 
 const changeModel = (col, title, id) => {
     store.phoneColor = col;
     modelName.value = title;
     currentId.value = id;
     selectedModel.value = true;
+};
+
+const changeSize = (size) => {
+    selectedSize.value = size;
+    animateSizeCircle(size);
+    size === 'small' ? store.size = 4 : store.size = 4.6;
+};
+
+const animateSizeCircle = (size) => {
+    const circle = sizeCircle.value;
+    if (size === 'small') {
+        gsap.to(circle, {
+            x: '-50%',
+            duration: 0.5,
+            ease: 'power2.inOut'
+
+        });
+    } else {
+        gsap.to(circle, {
+            x: '50%',
+            duration: 0.5,
+            ease: 'power2.inOut'
+        });
+    }
+
 };
 
 const models = ref([
@@ -47,6 +74,9 @@ const sizes = ref([
     { label: '6.7"', value: "large" },
 ]);
 
+const selectedSizeClass = computed(() => (size) => {
+    return { active: selectedSize.value === size.value, unactive: selectedSize.value !== size.value };
+});
 
 </script>
 
@@ -57,9 +87,10 @@ const sizes = ref([
         </div>
         <div class="bottom">
             <div class="model">
-                <Model3D />
+                <Model3D class="iPhone_sm" />
+                <Model3D class="iPhone_lg" />
             </div>
-            <div>{{ modelName }}</div>
+            <div class="model_name">{{ modelName }}</div>
             <div class="controls">
                 <div class="progress">
                     <template v-for="model in models" :key="model.id">
@@ -73,7 +104,13 @@ const sizes = ref([
                     </template>
                 </div>
                 <div class="control_btn">
-                    <div class="size_circle"></div>
+                    <div class="sizes">
+                        <div @click="changeSize(size.value)" v-for="size in sizes" class="size_text"
+                            :class="selectedSizeClass(size)">{{
+                                size.label }}
+                        </div>
+                    </div>
+                    <div ref="sizeCircle" class="size_circle"></div>
                 </div>
             </div>
         </div>
@@ -81,6 +118,10 @@ const sizes = ref([
 </template>
 
 <style scoped>
+.iPhone_lg {
+    scale: 1.15;
+}
+
 .titled {
     /* opacity: 0; */
     /* transform: translateY(100px); */
@@ -90,8 +131,9 @@ const sizes = ref([
 }
 
 .model {
-    width: 100%;
+    width: 50%;
     height: 800px;
+    display: flex;
 }
 
 .bottom {
@@ -100,6 +142,10 @@ const sizes = ref([
     justify-content: center;
     flex-direction: column;
     align-items: center;
+}
+
+.model_name {
+    font-size: .9rem;
 }
 
 .controls {
@@ -145,11 +191,7 @@ const sizes = ref([
 
         .selected {
             background-color: white;
-            box-shadow:
-                /* inner white */
-                /* middle magenta */
-                0 0 5px 0.6px rgba(255, 255, 255, 0.637);
-            /* outer cyan */
+            box-shadow: 0 0 5px 0.6px rgba(255, 255, 255, 0.637);
         }
 
         .unselected {
@@ -168,19 +210,59 @@ const sizes = ref([
     }
 
     .control_btn {
-        width: 100px;
+        width: 110px;
         height: 60px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
+        position: relative;
 
         .size_circle {
             width: 50px;
             height: 50px;
-            transform: translateX(-40%);
+            transform: translateX(50%);
             background-color: var(--apple-lighter);
             border-radius: 50%;
+        }
+
+        .sizes {
+            width: 110px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+
+            .size_text {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: rgb(56, 56, 56);
+                z-index: 1;
+                font-size: 1rem;
+            }
+
+            .size_text:first-child {
+                padding-left: .4rem;
+            }
+
+            .size_text:last-child {
+                padding-right: .4rem;
+            }
+
+            .size_text.active {
+                color: rgb(56, 56, 56);
+                transition: 1s ease;
+            }
+
+            .size_text.unactive {
+                color: rgb(174, 174, 174);
+            }
+
         }
     }
 }

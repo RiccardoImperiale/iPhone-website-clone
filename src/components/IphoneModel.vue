@@ -19,11 +19,9 @@ const fret1 = ref(null);
 const fret2 = ref(null);
 const fret3 = ref(null);
 
-let col = store.phoneColor;
 
 watch(() => store.phoneColor, (newColor) => {
-    col = newColor;
-    setColor(colors[col]);
+    setColor(colors[newColor]);
 });
 
 const colors = {
@@ -49,22 +47,8 @@ onMounted(() => {
     fret2.value = materials['jlzuBkUzuJqgiAK'];
     fret3.value = materials['HGhEhpqSBZRnjHC'];
 
-    if (col === 'black') {
-        setColor(colors.black);
-    }
-
-    if (col === 'yellow') {
-        setColor(colors.yellow);
-    }
-
-    if (col === 'blue') {
-        setColor(colors.blue);
-    }
-
-    if (col === 'white') {
-        setColor(colors.white);
-    }
-});
+    setColor(colors[store.phoneColor]);
+})
 
 
 const setColor = (newColor) => {
