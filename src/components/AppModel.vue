@@ -9,6 +9,8 @@ const selectedModel = ref(true);
 const currentId = ref(2);
 const selectedSize = ref('large');
 const sizeCircle = ref(null);
+const iPhone_sm = ref(null);
+const iPhone_lg = ref(null);
 
 const changeModel = (col, title, id) => {
     store.phoneColor = col;
@@ -20,6 +22,7 @@ const changeModel = (col, title, id) => {
 const changeSize = (size) => {
     selectedSize.value = size;
     animateSizeCircle(size);
+    animatePhoneSizes(size);
     size === 'small' ? store.size = 4 : store.size = 4.6;
 };
 
@@ -39,7 +42,23 @@ const animateSizeCircle = (size) => {
             ease: 'power2.inOut'
         });
     }
+};
 
+const animatePhoneSizes = (size) => {
+    const lg = size === 'small' ? '-100%' : '0%';
+    const sm = size === 'small' ? '0%' : '100%';
+
+    gsap.to(iPhone_lg.value.$el, {
+        x: lg,
+        duration: 1,
+        ease: 'power2.inOut'
+    });
+
+    gsap.to(iPhone_sm.value.$el, {
+        x: sm,
+        duration: 1,
+        ease: 'power2.inOut'
+    });
 };
 
 const models = ref([
@@ -87,8 +106,12 @@ const selectedSizeClass = computed(() => (size) => {
         </div>
         <div class="bottom">
             <div class="model">
-                <Model3D class="iPhone_sm" />
-                <Model3D class="iPhone_lg" />
+                <div class="iPhone">
+                    <Model3D ref="iPhone_sm" class="iPhone_sm" />
+                </div>
+                <div class="iPhone">
+                    <Model3D ref="iPhone_lg" class="iPhone_lg" />
+                </div>
             </div>
             <div class="model_name">{{ modelName }}</div>
             <div class="controls">
@@ -118,10 +141,6 @@ const selectedSizeClass = computed(() => (size) => {
 </template>
 
 <style scoped>
-.iPhone_lg {
-    scale: 1.15;
-}
-
 .titled {
     /* opacity: 0; */
     /* transform: translateY(100px); */
@@ -131,9 +150,28 @@ const selectedSizeClass = computed(() => (size) => {
 }
 
 .model {
-    width: 50%;
+    width: 30%;
     height: 800px;
     display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .iPhone {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+
+    .iPhone_sm {
+        scale: 1;
+        transform: translateX(100%);
+        z-index: 1;
+    }
+
+    .iPhone_lg {
+        scale: 1.15;
+        transform: translateX(0%);
+    }
 }
 
 .bottom {

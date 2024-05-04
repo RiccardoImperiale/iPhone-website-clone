@@ -1,6 +1,6 @@
 import { reactive } from 'vue'
 
 export const store = reactive({
-    phoneColor: 'blue',
+    phoneColor: 'black',
     size: 4.6
 })
