@@ -1,9 +1,6 @@
 <script>
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { animateLinks, animateTitle } from '../assets/js/animations.js';
 import VideoCarousel from './VideoCarousel.vue';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default {
     name: 'AppHighlights',
@@ -11,54 +8,10 @@ export default {
         VideoCarousel
     },
     mounted() {
-        ScrollTrigger.create({
-            trigger: this.$refs.title,
-            start: 'top bottom-=150px',
-            // end: 'top bottom-=150px',
-            end: '+=100',
-            scrub: true,
-            onEnter: () => {
-                gsap.to(this.$refs.title, {
-                    opacity: 1,
-                    duration: .5,
-                    y: 0,
-                    ease: 'power1.inOut'
-                });
-            },
-            onLeaveBack: () => {
-                gsap.to(this.$refs.title, {
-                    opacity: 0,
-                    duration: .5,
-                    y: 100,
-                    ease: 'power1.inOut'
-                });
-            },
-        });
+        animateTitle(this.$refs.title);
 
         const links = document.querySelectorAll('.link');
-        ScrollTrigger.batch(links, {
-            start: 'top bottom-=250px',
-            end: 'top bottom-=250px',
-            scrub: true,
-            onEnter: batch => {
-                gsap.to(batch, {
-                    opacity: 1,
-                    y: '0',
-                    duration: 0.3,
-                    stagger: 0.25,
-                    ease: 'power2.inOut'
-                });
-            },
-            onLeaveBack: batch => {
-                gsap.to(batch, {
-                    opacity: 0,
-                    y: '20px',
-                    duration: 0.3,
-                    stagger: 0.25,
-                    ease: 'power2.inOut'
-                });
-            },
-        });
+        animateLinks(links)
     },
 };
 </script>

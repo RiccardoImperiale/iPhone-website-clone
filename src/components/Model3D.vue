@@ -1,7 +1,7 @@
 <script setup>
-import { ref, watchEffect } from 'vue';
+import { ref } from 'vue';
 import { store } from '../store.js'
-import { TresCanvas, useTresContext } from '@tresjs/core';
+import { TresCanvas } from '@tresjs/core';
 import { OrbitControls } from '@tresjs/cientos';
 import IphoneModel from './IphoneModel.vue';
 

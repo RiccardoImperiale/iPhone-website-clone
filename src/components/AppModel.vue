@@ -1,12 +1,8 @@
 <script setup>
+import { animateModels, animateSizeCircle, animatePhoneSizes, animateTitle } from '../assets/js/animations.js';
 import { ref, computed, onMounted } from 'vue';
 import Model3D from './Model3D.vue';
 import { store } from '../store.js'
-import { gsap } from 'gsap';
-
-import ScrollTrigger from 'gsap/ScrollTrigger'; // Import ScrollTrigger
-
-gsap.registerPlugin(ScrollTrigger);
 
 const modelName = ref('iPhone 15 Pro in Black Titanium');
 const selectedModel = ref(true);
@@ -18,107 +14,6 @@ const iPhone_lg = ref(null);
 const title = ref(null);
 const model = ref(null);
 const models_wrapper = ref(null);
-
-onMounted(() => {
-    ScrollTrigger.create({
-        trigger: title.value,
-        start: 'top bottom-=150px',
-        end: 'top bottom+=100',
-        scrub: true,
-        onEnter: () => {
-            gsap.to(title.value, {
-                opacity: 1,
-                duration: .5,
-                y: 0,
-                ease: 'power1.inOut'
-            });
-        },
-        onLeaveBack: () => {
-            gsap.to(title.value, {
-                opacity: 0,
-                duration: .5,
-                y: 100,
-                ease: 'power1.inOut'
-            });
-        },
-    })
-
-    ScrollTrigger.create({
-        trigger: models_wrapper.value,
-        start: 'top bottom+=90%',
-        end: 'top bottom+=65%',
-        scrub: true,
-        onEnter: () => {
-            gsap.to(models_wrapper.value, {
-                opacity: 1,
-                y: '0%',
-                duration: 1,
-                ease: 'power2.inOut'
-            });
-        },
-        onLeaveBack: () => {
-            gsap.to(models_wrapper.value, {
-                opacity: 0,
-                y: '100%',
-                duration: 1,
-                ease: 'power1.inOut'
-            });
-        },
-    })
-
-})
-
-const changeModel = (col, title, id) => {
-    store.phoneColor = col;
-    modelName.value = title;
-    currentId.value = id;
-    selectedModel.value = true;
-};
-
-const changeSize = (size) => {
-    selectedSize.value = size;
-    animateSizeCircle(size);
-    animatePhoneSizes(size);
-    store.resetOrbit = true;
-    // store.modelRotation = { x: 0, y: 0, z: 0 }
-    // console.log(store.modelRotation);
-    // size === 'small' ? store.size = 4 : store.size = 4.6;
-};
-
-const animateSizeCircle = (size) => {
-    const circle = sizeCircle.value;
-    if (size === 'small') {
-        gsap.to(circle, {
-            x: '-50%',
-            duration: 0.5,
-            ease: 'power2.inOut'
-
-        });
-    } else {
-        gsap.to(circle, {
-            x: '50%',
-            duration: 0.5,
-            ease: 'power2.inOut'
-        });
-    }
-};
-
-const animatePhoneSizes = (size) => {
-    const lg = size === 'small' ? '-100%' : '0%';
-    const sm = size === 'small' ? '0%' : '100%';
-
-    gsap.to(iPhone_lg.value.$el, {
-        x: lg,
-        duration: 1,
-        ease: 'power2.inOut'
-    });
-
-    gsap.to(iPhone_sm.value.$el, {
-        x: sm,
-        duration: 1,
-        ease: 'power2.inOut'
-    });
-};
 
 const models = ref([
     {
@@ -151,6 +46,29 @@ const sizes = ref([
     { label: '6.1"', value: "small" },
     { label: '6.7"', value: "large" },
 ]);
+
+onMounted(() => {
+    animateTitle(title.value)
+    animateModels(models_wrapper.value)
+})
+
+const changeModel = (col, title, id) => {
+    store.phoneColor = col;
+    modelName.value = title;
+    currentId.value = id;
+    selectedModel.value = true;
+};
+
+const changeSize = (size) => {
+    selectedSize.value = size;
+    animateSizeCircle(size, sizeCircle.value);
+    animatePhoneSizes(size, iPhone_lg.value.$el, iPhone_sm.value.$el);
+    store.resetOrbit = true;
+    // store.modelRotation = { x: 0, y: 0, z: 0 }
+    // console.log(store.modelRotation);
+    // size === 'small' ? store.size = 4 : store.size = 4.6;
+};
+
 
 const selectedSizeClass = computed(() => (size) => {
     return { active: selectedSize.value === size.value, unactive: selectedSize.value !== size.value };
