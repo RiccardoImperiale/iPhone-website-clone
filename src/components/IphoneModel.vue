@@ -15,10 +15,10 @@ const back = ref(null);
 const back2 = ref(null);
 const back3 = ref(null);
 const back4 = ref(null);
+const logo = ref(null);
 const fret1 = ref(null);
 const fret2 = ref(null);
 const fret3 = ref(null);
-
 
 watch(() => store.phoneColor, (newColor) => {
     setColor(colors[newColor]);
@@ -44,6 +44,7 @@ onMounted(() => {
     back3.value = materials['bCgzXjHOanGdTFV'];
     back4.value = materials['vhaEJjZoqGtyLdo'];
     fret1.value = materials['PaletteMaterial002'];
+    logo.value = materials['PaletteMaterial003'];
     fret2.value = materials['jlzuBkUzuJqgiAK'];
     fret3.value = materials['HGhEhpqSBZRnjHC'];
 
@@ -54,14 +55,18 @@ const setColor = (newColor) => {
     cameraNotch.value.color.set(newColor.col2);
     dispBorder.value.color.set(newColor.col2);
     screen.value.color.set(newColor.col2);
-    // cameras.value.color.set(newColor.col1);
+    screen.value.roughness = 1;
+    screen.value.refractionRatio = 0.9;
+    screen.value.metalness = 0.5;
     flashBorder.value.color.set(newColor.col1);
     lato.value.color.set(newColor.col1);
+    lato.value.metalness = 0.9;
     slot.value.color.set(newColor.col1);
     back.value.color.set(newColor.col1);
     back2.value.color.set(newColor.col1);
     back3.value.color.set(newColor.col1);
     back4.value.color.set(newColor.col1);
+    back4.value.roughness = 0;
     fret1.value.color.set(newColor.col2);
     fret2.value.color.set(newColor.col2);
     fret3.value.color.set(newColor.col2);

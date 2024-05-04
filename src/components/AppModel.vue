@@ -6,7 +6,7 @@ import { store } from '../store.js'
 
 const modelName = ref('iPhone 15 Pro in Black Titanium');
 const selectedModel = ref(true);
-const currentId = ref(2);
+const currentId = ref(4);
 const selectedSize = ref('large');
 const sizeCircle = ref(null);
 const iPhone_sm = ref(null);
@@ -63,8 +63,14 @@ const changeSize = (size) => {
     selectedSize.value = size;
     animateSizeCircle(size, sizeCircle.value);
     animatePhoneSizes(size, iPhone_lg.value.$el, iPhone_sm.value.$el);
-    // store.resetRot = !store.resetRot
-    // console.log(store.resetRot);
+
+    if (size == 'large') {
+        store.rotateR = true
+        store.rotateL = false
+    } else {
+        store.rotateR = false
+        store.rotateL = true
+    }
 };
 
 

@@ -2,7 +2,10 @@ import { reactive } from 'vue'
 
 export const store = reactive({
     phoneColor: 'black',
-    // resetOrbit: false,
-    // modelRotation: { x: 0, y: 0, z: 0 },
-    // resetRot: true
+    rotateL: false,
+    rotateR: true,
+    // rotate: {
+    //     rotL: false,
+    //     rotR: true
+    // }
 })
