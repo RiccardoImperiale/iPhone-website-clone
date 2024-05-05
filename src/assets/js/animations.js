@@ -182,3 +182,19 @@ export const animateInfos = (infos) => {
     });
 }
 
+export const animateVideo = (video) => {
+    gsap.to(video, {
+        scrollTrigger: {
+            trigger: video,
+            toggleActions: 'play pause reverse restart',
+            start: '-10% bottom'
+        },
+        onComplete: () => {
+            video.play()
+        }
+    })
+
+}
+
+
+

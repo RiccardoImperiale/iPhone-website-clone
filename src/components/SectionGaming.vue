@@ -1,8 +1,8 @@
 <script>
-import { animateImages, animateTitle, animateInfos, animateVideo } from '../assets/js/animations.js';
+import { animateImages, animateTitle, animateInfos } from '../assets/js/animations.js';
 
 export default {
-    name: 'SectionStory',
+    name: 'SectionGaming',
     components: {
 
     },
@@ -12,12 +12,6 @@ export default {
         const images = document.querySelectorAll('.image');
         const infoText = document.querySelectorAll('.info_text');
 
-        animateVideo(this.$refs.video);
-
-
-
-
-
         animateImages(images);
         animateInfos(infoText);
     },
@@ -25,48 +19,23 @@ export default {
 </script>
 
 <template>
-    <section id="story">
+    <section id="gaming">
         <div class="top container">
             <div class="title" ref="title">Explore the full story.</div>
         </div>
-        <div class="bottom container-sm">
-            <div class="title">iPhone.<br>Forged in titanium.</div>
-            <div class="slides">
-                <div class="video">
-                    <video ref="video" autoplay muted playsInline>
-                        <source src="/assets/videos/explore.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="images">
-                    <div class="img_box">
-                        <img class="image" src="/assets/images/explore1.jpg" alt="iPhone closeup">
-                    </div>
-                    <div class="img_box">
-                        <img class="image" src="/assets/images/explore2.jpg" alt="iPhone closeup">
-                    </div>
-                </div>
-                <div class="bottom_text">
-                    <div class="text">
-                        <p class="info_text">
-                            iPhone 15 Pro is <span>the first iPhone to feature an aerospace‑grade titanium design,
-                            </span>using the same alloy that spacecraft use for missions to Mars.
-                        </p>
-                    </div>
-                    <div class="text">
-                        <p class="info_text">
-                            Titanium has one of the best strength‑to‑weight ratios of any metal, making these our
-                            <span>lightest Pro models ever</span>. You’ll notice the
-                            moment you pick one up.
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <div class="phone container">
+
+            wfe
+        </div>
+        <div class="bottom container">
+
+            fwef
         </div>
     </section>
 </template>
 
 <style scoped>
-#story {
+#gaming {
     width: 100vw;
     overflow: hidden;
     height: 100%;
