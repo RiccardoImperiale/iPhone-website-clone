@@ -1,9 +1,10 @@
-# Iphone Website Clone
+# iPhone Website Clone
+..still working on it but here's the current version [Desktop Version](https://iphone15webclone.netlify.app/) thanks bye 👉 👈
 
-⚙️ Tech Stack
+## ⚙️ Tech Stack
 - Vue.js
 - Three.js
-- TreeJS
+- TresJS
 - GSAP
 - Vite
 
