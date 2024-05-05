@@ -2,6 +2,7 @@
   --apple-darker: black;
   --apple-lighter: white;
   --apple-gray-800: rgb(39, 39, 39);
+  --apple-gray-700: rgb(56, 56, 56);
   --apple-gray-500: gray;
   --apple-gray-100: #e2e4e7;
   --apple-gray-200: #ababab;
@@ -50,6 +51,12 @@ a {
 .container-sm {
   width: 80%;
   max-width: 1440px;
+  margin: auto;
+}
+
+.container-xs {
+  width: 90%;
+  max-width: 1200px;
   margin: auto;
 }
 

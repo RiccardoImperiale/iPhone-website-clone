@@ -1,12 +1,16 @@
 <script>
+import { animateVideo } from '../assets/js/animations.js';
 
 export default {
     name: 'PhoneGaming',
+    mounted() {
+        animateVideo(this.$refs.gaming_vid);
+    },
 };
 </script>
 
 <template>
-    <div class="phone container">
+    <div class="phone container-xs">
         <img class="frame_img" src="/assets/images/frame.png" alt="phone frame">
         <video class="frame_vid" ref="gaming_vid" preload="none" muted playsInline autoplay>
             <source src="/assets/videos/frame.mp4" type="video/mp4">
@@ -30,17 +34,17 @@ export default {
     }
 
     .frame_vid {
-        width: 96%;
-        height: 96%;
+        width: 97%;
+        height: 97%;
         object-fit: cover;
-        border-radius: 2rem;
+        border-radius: 2.5rem;
     }
 }
 
 .game_title {
     margin-top: 3rem;
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--apple-gray-500);
     font-weight: 500;
 }
