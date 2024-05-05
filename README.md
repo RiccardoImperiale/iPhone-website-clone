@@ -1,5 +1,5 @@
 # iPhone Website Clone
-..still working on it but here's the current version [Desktop Version](https://iphone15webclone.netlify.app/) thanks bye 👉 👈
+Still working on it but here's the current version [Desktop Version](https://iphone15webclone.netlify.app/) thanks bye 👉👈
 
 ## ⚙️ Tech Stack
 - Vue.js

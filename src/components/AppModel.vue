@@ -104,7 +104,7 @@ const selectedSizeClass = computed(() => (size) => {
             </div>
             <div class="model_name no_select">{{
                 modelName
-            }}</div>
+                }}</div>
             <div class="controls">
                 <div class="progress">
                     <template v-for="model in models" :key="model.id">
@@ -134,7 +134,7 @@ const selectedSizeClass = computed(() => (size) => {
 <style scoped>
 #model {
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .title {
