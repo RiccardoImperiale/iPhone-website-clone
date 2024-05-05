@@ -23,6 +23,10 @@ export default {
     },
     setIsHover(isHovered) {
       store.isHovered = isHovered;
+    },
+    setIsHoverColor(isHovered, color) {
+      store.isHovered = isHovered;
+      store.hoverCol = color;
     }
   },
   beforeDestroy() {
@@ -39,8 +43,9 @@ export default {
       <source :src="videoSrc ? '/assets/videos/' + videoSrc : ''" type="video/mp4" />
     </video>
     <div ref="cta" id="cta">
-      <a @mouseover="setIsHover(true)" @mouseleave="setIsHover(false)" href="#highlights" class="btn">Buy</a>
-      <p> From $199/month or $999</p>
+      <a href="#highlights" class="btn">Buy</a>
+      <p @mouseover="setIsHoverColor(true, 'white')" @mouseleave="setIsHoverColor(false, 'var(--apple-gray-900)')"> From
+        $199/month or $999</p>
     </div>
   </section>
 </template>

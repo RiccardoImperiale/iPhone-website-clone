@@ -45,7 +45,7 @@ export default {
             return x * (1 - a) + y * a
         },
         handleHoverChange(newVal) {
-            this.size = newVal ? '100px' : '60px';
+            this.size = newVal ? '150px' : '60px';
             this.colorStyle = newVal ? 'var(--apple-gray-300)' : 'var(--apple-gray-900)';
         },
         handleHoverColChange(newVal) {

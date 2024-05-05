@@ -134,6 +134,7 @@ const selectedSizeClass = computed(() => (size) => {
 <style scoped>
 #model {
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .title {
@@ -142,6 +143,7 @@ const selectedSizeClass = computed(() => (size) => {
     font-weight: 500;
     position: relative;
     z-index: 1;
+    width: 40%;
 }
 
 .models_wrapper {

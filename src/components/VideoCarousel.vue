@@ -139,7 +139,7 @@ export default {
                 <video playsInline preload="auto" muted :ref="`video-${index}`" @ended="playNextVideo(index)">
                     <source :src="video.video" type="video/mp4">
                 </video>
-                <div :ref="'text' + index" class="card_text">
+                <div :ref="'text' + index" class="card_text no_select">
                     <p v-for="text in video.textLists">{{ text }}</p>
                 </div>
             </div>
