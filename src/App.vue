@@ -1,16 +1,18 @@
 <script>
 import AppHeader from './components/AppHeader.vue';
 import AppHero from './components/AppHero.vue';
-import AppHighlights from './components/AppHighlights.vue';
+import SectionHighlights from './components/SectionHighlights.vue';
 import AppModel from './components/AppModel.vue';
+import SectionStory from './components/SectionStory.vue';
 
 export default {
   name: 'App',
   components: {
     AppHeader,
     AppHero,
-    AppHighlights,
+    SectionHighlights,
     AppModel,
+    SectionStory
   }
 }
 </script>
@@ -19,8 +21,9 @@ export default {
   <main>
     <AppHeader />
     <AppHero />
-    <AppHighlights />
+    <SectionHighlights />
     <AppModel />
+    <SectionStory />
     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae minima neque corporis illum placeat
       voluptatibus quo enim maxime sit illo, blanditiis rem excepturi rerum dignissimos labore sunt libero aliquid
       inventore est! Vero illo a, ipsa eius temporibus enim culpa excepturi cupiditate natus magnam voluptatum minus cum

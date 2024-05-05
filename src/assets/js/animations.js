@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 export const animateModels = (models_wrapper) => {
     ScrollTrigger.create({
         trigger: models_wrapper,
-        start: 'top bottom+=90%',
+        start: 'top bottom+=80%',
         end: 'top bottom+=65%',
         scrub: true,
         onEnter: () => {
@@ -88,6 +88,22 @@ export const animateTitle = (title) => {
     })
 };
 
+// export const animateTitle = (title) => {
+//     gsap.to(title, {
+//         trigger: title,
+//         opacity: 1,
+//         duration: .5,
+//         y: 0,
+//         ease: 'power1.inOut',
+//         scrub: true,
+//         scrollTrigger: {
+//             trigger: title,
+//             toggleActions: 'restart reverse restart reverse',
+//             start: 'top 85%',
+//         },
+//     });
+// };
+
 export const animateLinks = (links) => {
     ScrollTrigger.batch(links, {
         start: 'top bottom-=250px',
@@ -114,4 +130,30 @@ export const animateLinks = (links) => {
     });
 }
 
+export const animateImages = (images) => {
+    ScrollTrigger.batch(images, {
+        start: 'top 85%',
+        scrub: true,
+        onEnter: batch => {
+            gsap.to(batch, {
+                opacity: 1,
+                scale: 1,
+                stagger: 0.25,
+                duration: 1.5,
+                filter: "blur(0px)",
+                ease: 'power1'
+            });
+        },
+        onLeaveBack: batch => {
+            gsap.to(batch, {
+                opacity: 0.5,
+                scale: 1.3,
+                stagger: 0.25,
+                duration: 1.5,
+                filter: "blur(10px)",
+                ease: 'power1'
+            });
+        },
+    });
+}
 

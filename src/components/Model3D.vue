@@ -6,9 +6,11 @@ import IphoneModel from './IphoneModel.vue';
 import { gsap } from 'gsap';
 import { store } from '../store.js'
 
-
-// const iphoneModelRef = shallowRef(null);
 const rotationY = ref(0);
+
+watch(() => store.rotateL, (newVal) => newVal && rotate('left'));
+watch(() => store.rotateR, (newVal) => newVal && rotate('right'));
+
 
 const rotate = (direction) => {
     let angle;
@@ -16,9 +18,14 @@ const rotate = (direction) => {
     gsap.to(rotationY, { value: angle, duration: 1, ease: 'power1.inOut' });
 }
 
-watch(() => store.rotateL, (newVal) => newVal && rotate('left'));
-watch(() => store.rotateR, (newVal) => newVal && rotate('right'));
+const onStart = () => {
+    console.log('start');
+}
 
+const onEnd = () => {
+    // reset rotation
+    console.log('end');
+}
 
 
 </script>
@@ -26,8 +33,8 @@ watch(() => store.rotateR, (newVal) => newVal && rotate('right'));
 <template>
     <TresCanvas alpha preset="realistic">
         <TresPerspectiveCamera :position="[0, 0, 1]" :look-at="[0, 0, 0]" />
-        <OrbitControls ref="orbitControlsRef" :enableZoom="false" :rotateSpeed="0.5" :enableDamping="true"
-            :dampingFactor="0.1" :enablePan="false" />
+        <OrbitControls @start="onStart" @end="onEnd" ref="orbitControlsRef" :enableZoom="false" :rotateSpeed="0.5"
+            :enableDamping="true" :dampingFactor="0.1" :enablePan="false" />
         <Suspense>
             <IphoneModel :rotation="[0, rotationY, 0]" ref="iphoneModelRef" :scale="4" />
         </Suspense>
