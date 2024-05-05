@@ -157,3 +157,28 @@ export const animateImages = (images) => {
     });
 }
 
+export const animateInfos = (infos) => {
+    ScrollTrigger.batch(infos, {
+        start: 'top 98%',
+        scrub: true,
+        onEnter: batch => {
+            gsap.to(batch, {
+                opacity: 1,
+                y: 0,
+                stagger: 0.1,
+                duration: 0.85,
+                ease: 'power2.inOut'
+            });
+        },
+        onLeaveBack: batch => {
+            gsap.to(batch, {
+                opacity: 0,
+                y: '-150px',
+                stagger: 0.1,
+                duration: 0.85,
+                ease: 'power2.inOut'
+            });
+        },
+    });
+}
+

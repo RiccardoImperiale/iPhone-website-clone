@@ -1,9 +1,5 @@
 <script>
-import { animateImages, animateTitle } from '../assets/js/animations.js';
-// import { gsap } from 'gsap';
-// import ScrollTrigger from 'gsap/ScrollTrigger';
-
-// gsap.registerPlugin(ScrollTrigger);
+import { animateImages, animateTitle, animateInfos } from '../assets/js/animations.js';
 
 export default {
     name: 'SectionStory',
@@ -14,7 +10,10 @@ export default {
         animateTitle(this.$refs.title);
 
         const images = document.querySelectorAll('.image');
+        const infoText = document.querySelectorAll('.info_text');
+
         animateImages(images);
+        animateInfos(infoText);
     },
 };
 </script>
@@ -42,15 +41,15 @@ export default {
                 </div>
                 <div class="bottom_text">
                     <div class="text">
-                        <p>
+                        <p class="info_text">
                             iPhone 15 Pro is <span>the first iPhone to feature an aerospace‑grade titanium design,
                             </span>using the same alloy that spacecraft use for missions to Mars.
                         </p>
                     </div>
                     <div class="text">
-                        <p>
+                        <p class="info_text">
                             Titanium has one of the best strength‑to‑weight ratios of any metal, making these our
-                            <span>lightest Pro models ever</span>. You’ll notice the difference the
+                            <span>lightest Pro models ever</span>. You’ll notice the
                             moment you pick one up.
                         </p>
                     </div>
@@ -145,12 +144,14 @@ export default {
                 width: calc(50% - 1rem);
                 overflow: hidden;
 
-                & p {
+                .info_text {
                     color: var(--apple-gray-500);
-                    font-size: 1.35rem;
+                    font-size: 1.4rem;
                     line-height: 1.8rem;
                     font-weight: 600;
                     letter-spacing: 0.4px;
+                    transform: translateY(120%);
+                    opacity: 0;
                 }
 
                 & span {
