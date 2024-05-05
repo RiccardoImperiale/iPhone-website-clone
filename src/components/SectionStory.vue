@@ -3,9 +3,6 @@ import { animateImages, animateTitle, animateInfos, animateVideo } from '../asse
 
 export default {
     name: 'SectionStory',
-    components: {
-
-    },
     mounted() {
         animateTitle(this.$refs.title);
 
@@ -13,11 +10,6 @@ export default {
         const infoText = document.querySelectorAll('.info_text');
 
         animateVideo(this.$refs.video);
-
-
-
-
-
         animateImages(images);
         animateInfos(infoText);
     },

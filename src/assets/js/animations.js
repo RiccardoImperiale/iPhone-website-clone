@@ -88,22 +88,6 @@ export const animateTitle = (title) => {
     })
 };
 
-// export const animateTitle = (title) => {
-//     gsap.to(title, {
-//         trigger: title,
-//         opacity: 1,
-//         duration: .5,
-//         y: 0,
-//         ease: 'power1.inOut',
-//         scrub: true,
-//         scrollTrigger: {
-//             trigger: title,
-//             toggleActions: 'restart reverse restart reverse',
-//             start: 'top 85%',
-//         },
-//     });
-// };
-
 export const animateLinks = (links) => {
     ScrollTrigger.batch(links, {
         start: 'top bottom-=250px',
@@ -193,8 +177,24 @@ export const animateVideo = (video) => {
             video.play()
         }
     })
-
 }
+
+export const animateChip = (chip) => {
+    gsap.from(chip, {
+        scrollTrigger: {
+            trigger: chip,
+            start: '20% bottom',
+            toggleActions: "restart none none none"
+        },
+        opacity: 0,
+        scale: 2,
+        duration: 2,
+        ease: 'power2.inOut'
+    })
+}
+
+
+
 
 
 
