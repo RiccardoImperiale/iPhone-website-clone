@@ -181,7 +181,7 @@ export default {
     .card {
         flex: 0 0;
         flex-basis: 80%;
-        height: 800px;
+        min-height: 720px;
         border-radius: 2rem;
         position: relative;
         overflow: hidden;

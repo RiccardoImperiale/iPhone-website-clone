@@ -81,9 +81,9 @@ const selectedSizeClass = computed(() => (size) => {
 </script>
 
 <template>
-    <section id="3d_model" class="container">
+    <section id="model" class="container">
         <div class="top">
-            <div class="title" ref="title">Take a closer look.</div>
+            <div class="title no_select" ref="title">Take a closer look.</div>
         </div>
         <div class="bottom">
             <div ref="models_wrapper" class="models_wrapper">
@@ -124,6 +124,10 @@ const selectedSizeClass = computed(() => (size) => {
 </template>
 
 <style scoped>
+#model {
+    min-height: 100vh;
+}
+
 .title {
     color: var(--apple-gray-500);
     font-size: 3.75rem;
@@ -153,14 +157,12 @@ const selectedSizeClass = computed(() => (size) => {
         height: 100%;
         position: absolute;
         cursor: grab;
-        /* transform: rotate3d(2, 2, 1) */
     }
 
     .iPhone_sm {
         scale: 1;
         transform: translateX(100%);
         z-index: 3;
-
     }
 
     .iPhone_lg {

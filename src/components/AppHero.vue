@@ -1,12 +1,13 @@
 <script>
 import { gsap } from 'gsap';
+import { store } from '../store.js'
 
 export default {
   name: 'AppHero',
   data() {
     return {
       isMobile: false,
-      videoSrc: ''
+      videoSrc: '',
     }
   },
   mounted() {
@@ -19,6 +20,12 @@ export default {
   methods: {
     checkScreenWidth() {
       window.innerWidth < 720 ? this.videoSrc = 'smallHero.mp4' : this.videoSrc = 'hero.mp4'
+    },
+
+    setIsHover(isHovered) {
+      store.isHovered = isHovered;
+      console.log(store.isHovered);
+
     }
   },
   beforeDestroy() {
@@ -29,7 +36,8 @@ export default {
 
 <template>
   <section id="hero">
-    <span ref="textTitle" class="text_title">iPhone 15 Pro</span>
+    <span @mouseover="setIsHover(true)" @mouseleave="setIsHover(false)" ref="textTitle"
+      class="text_title no_select">iPhone 15 Pro</span>
     <video autoplay muted playsInline :key="videoSrc">
       <source :src="videoSrc ? '/assets/videos/' + videoSrc : ''" type="video/mp4" />
     </video>
@@ -59,7 +67,7 @@ export default {
 }
 
 video {
-  max-width: 1920px;
+  max-width: 1240px;
   width: 100%;
   margin-bottom: 15rem;
 }

@@ -39,7 +39,7 @@ export default {
 #highlights {
     width: 100vw;
     overflow: hidden;
-    height: 100%;
+    min-height: 100vh;
     background-color: #101010;
 
     .top {

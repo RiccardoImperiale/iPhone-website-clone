@@ -1,6 +1,7 @@
 :root {
   --apple-darker: black;
   --apple-lighter: white;
+  --apple-gray-900: #101010;
   --apple-gray-800: rgb(39, 39, 39);
   --apple-gray-700: rgb(56, 56, 56);
   --apple-gray-500: gray;
@@ -17,8 +18,17 @@
   box-sizing: border-box;
 }
 
+.no_select {
+  user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+}
+
 html {
   scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--apple-gray-500) var(--apple-darker);
 }
 
 body {
@@ -44,19 +54,19 @@ a {
 
 .container {
   width: 90%;
-  max-width: 1440px;
+  max-width: 1280px;
   margin: auto;
 }
 
 .container-sm {
   width: 80%;
-  max-width: 1440px;
+  max-width: 1280px;
   margin: auto;
 }
 
 .container-xs {
   width: 90%;
-  max-width: 1200px;
+  max-width: 1024px;
   margin: auto;
 }
 
