@@ -4,7 +4,6 @@ export const store = reactive({
     phoneColor: 'black',
     rotateL: false,
     rotateR: true,
-    isHovered: false
-
-
+    isHovered: false,
+    hoverCol: ''
 })

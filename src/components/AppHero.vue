@@ -21,11 +21,8 @@ export default {
     checkScreenWidth() {
       window.innerWidth < 720 ? this.videoSrc = 'smallHero.mp4' : this.videoSrc = 'hero.mp4'
     },
-
     setIsHover(isHovered) {
       store.isHovered = isHovered;
-      console.log(store.isHovered);
-
     }
   },
   beforeDestroy() {
@@ -35,15 +32,15 @@ export default {
 </script>
 
 <template>
-  <section id="hero">
+  <section id="hero" class="no_select">
     <span @mouseover="setIsHover(true)" @mouseleave="setIsHover(false)" ref="textTitle"
       class="text_title no_select">iPhone 15 Pro</span>
     <video autoplay muted playsInline :key="videoSrc">
       <source :src="videoSrc ? '/assets/videos/' + videoSrc : ''" type="video/mp4" />
     </video>
     <div ref="cta" id="cta">
-      <a href="#highlights" class="btn">Buy</a>
-      <p>From $199/month or $999</p>
+      <a @mouseover="setIsHover(true)" @mouseleave="setIsHover(false)" href="#highlights" class="btn">Buy</a>
+      <p> From $199/month or $999</p>
     </div>
   </section>
 </template>

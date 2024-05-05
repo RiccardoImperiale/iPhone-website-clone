@@ -18,23 +18,21 @@ const rotate = (direction) => {
     gsap.to(rotationY, { value: angle, duration: 1, ease: 'power1.inOut' });
 }
 
-const onStart = () => {
-    console.log('start');
-}
+// const onStart = () => {
+//     console.log('start');
+// }
 
-const onEnd = () => {
-    // reset rotation
-    console.log('end');
-}
-
+// const onEnd = () => {
+//     console.log('end');
+// }
 
 </script>
 
 <template>
     <TresCanvas alpha preset="realistic">
         <TresPerspectiveCamera :position="[0, 0, 1]" :look-at="[0, 0, 0]" />
-        <OrbitControls @start="onStart" @end="onEnd" ref="orbitControlsRef" :enableZoom="false" :rotateSpeed="0.5"
-            :enableDamping="true" :dampingFactor="0.1" :enablePan="false" />
+        <OrbitControls ref="orbitControlsRef" :enableZoom="false" :rotateSpeed="0.5" :enableDamping="true"
+            :dampingFactor="0.1" :enablePan="false" />
         <Suspense>
             <IphoneModel :rotation="[0, rotationY, 0]" ref="iphoneModelRef" :scale="4" />
         </Suspense>

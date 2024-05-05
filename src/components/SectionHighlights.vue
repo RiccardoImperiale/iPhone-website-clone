@@ -1,4 +1,5 @@
 <script>
+import { store } from '../store.js'
 import { animateLinks, animateTitle } from '../assets/js/animations.js';
 import VideoCarousel from './VideoCarousel.vue';
 
@@ -13,19 +14,26 @@ export default {
         const links = document.querySelectorAll('.link');
         animateLinks(links)
     },
+    methods: {
+        setIsHover(isHovered) {
+            store.isHovered = isHovered;
+        }
+    },
 };
 </script>
 
 <template>
     <section id="highlights">
         <div class="top container">
-            <div class="title" ref="title">Get The Highlights.</div>
+            <div @mouseover="setIsHover(true)" @mouseleave="setIsHover(false)" class="title no_select" ref="title">Get
+                The
+                Highlights.</div>
             <div class="links">
-                <div class="link">
+                <div class="link" @mouseover="setIsHover(true)" @mouseleave="setIsHover(false)">
                     <a href="#">Watch film</a>
                     <img src="/assets/images/watch.svg" alt="watch">
                 </div>
-                <div class="link">
+                <div class="link" @mouseover="setIsHover(true)" @mouseleave="setIsHover(false)">
                     <a href="#">Watch the event</a>
                     <img src="/assets/images/right.svg" alt="right arrow">
                 </div>

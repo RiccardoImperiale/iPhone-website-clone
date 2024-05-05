@@ -73,6 +73,10 @@ const changeSize = (size) => {
     }
 };
 
+const setIsHover = (isHovered) => {
+    store.isHovered = isHovered;
+};
+
 
 const selectedSizeClass = computed(() => (size) => {
     return { active: selectedSize.value === size.value, unactive: selectedSize.value !== size.value };
@@ -83,7 +87,9 @@ const selectedSizeClass = computed(() => (size) => {
 <template>
     <section id="model" class="container">
         <div class="top">
-            <div class="title no_select" ref="title">Take a closer look.</div>
+            <div @mouseover="() => setIsHover(true)" @mouseleave="() => setIsHover(false)" class="title no_select"
+                ref="title">Take
+                a closer look.</div>
         </div>
         <div class="bottom">
             <div ref="models_wrapper" class="models_wrapper">
@@ -96,7 +102,9 @@ const selectedSizeClass = computed(() => (size) => {
                     </div>
                 </div>
             </div>
-            <div class="model_name">{{ modelName }}</div>
+            <div class="model_name no_select">{{
+                modelName
+            }}</div>
             <div class="controls">
                 <div class="progress">
                     <template v-for="model in models" :key="model.id">
@@ -132,6 +140,8 @@ const selectedSizeClass = computed(() => (size) => {
     color: var(--apple-gray-500);
     font-size: 3.75rem;
     font-weight: 500;
+    position: relative;
+    z-index: 1;
 }
 
 .models_wrapper {

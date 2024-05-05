@@ -1,4 +1,5 @@
 <script>
+import { store } from '../store.js'
 import { animateChip, animateInfos } from '../assets/js/animations.js';
 import PhoneGaming from './PhoneGaming.vue'
 
@@ -12,33 +13,48 @@ export default {
         const infoText = document.querySelectorAll('.info_text');
         animateInfos(infoText);
     },
+    methods: {
+        setIsHover(isHovered) {
+            store.isHovered = isHovered;
+        },
+        setIsHoverColor(isHovered, color) {
+            store.isHovered = isHovered;
+            store.hoverCol = color;
+        }
+    }
 };
 </script>
 
 <template>
     <section id="gaming">
-        <div class="top container">
+        <div class="top container no_select">
             <img ref="chip" src="/assets/images/chip.jpeg" alt="chip" width="180" height="180">
-            <h2 class="title">A17 Pro chip.<br>A monster win for gaming.</h2>
-            <p>It’s here. The biggest redesign in the history of Apple GPUs.</p>
+            <h2 @mouseover="setIsHoverColor(true, 'white')"
+                @mouseleave="setIsHoverColor(false, 'var(--apple-gray-900)')" class="title">A17 Pro chip.<br>A monster
+                win for gaming.</h2>
+            <p @mouseover="setIsHover(true)" @mouseleave="setIsHover(false)">It’s here. The biggest redesign in the
+                history of Apple GPUs.</p>
         </div>
 
         <PhoneGaming />
 
-        <div class="bottom_text container-xs">
+        <div class="bottom_text container-xs no_select">
             <div class="text">
-                <p class="info_text">
+                <p class="info_text" @mouseover="setIsHoverColor(true, 'white')"
+                    @mouseleave="setIsHoverColor(false, 'var(--apple-gray-900)')">
                     A17 Pro is an entirely new class of iPhone chip that delivers our <span>best
                         graphics performance by far</span>.
                 </p>
-                <p class="info_text">
+                <p class="info_text" @mouseover="setIsHoverColor(true, 'white')"
+                    @mouseleave="setIsHoverColor(false, 'var(--apple-gray-900)')">
                     Mobile <span>games will look and feel so immersive</span>, with incredibly detailed environments and
                     more realistic characters. And with industry-leading speed and efficiency, A17 Pro takes fast and
                     runs with it.
                 </p>
             </div>
             <div class="text">
-                <p class="info_text">
+                <p class="info_text" @mouseover="setIsHoverColor(true, 'white')"
+                    @mouseleave="setIsHoverColor(false, 'var(--apple-gray-900)')">
                     New <br>
                     <span>Pro-class GPU</span> <br>
                     with 6 cores

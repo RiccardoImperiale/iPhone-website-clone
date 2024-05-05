@@ -7,17 +7,19 @@ export default {
     name: 'CustomCursor',
     data() {
         return {
-            size: '40px',
+            size: '60px',
             colorStyle: 'none',
-            borderStyle: 'none',
+            blurStyle: 'none',
             mouse: { x: 0, y: 0 },
             delayedMouse: { x: 0, y: 0 },
+            hoverCol: ''
         }
     },
     mounted() {
         this.animate();
         window.addEventListener("mousemove", this.manageMouseMove)
         this.$watch(() => store.isHovered, this.handleHoverChange);
+        this.$watch(() => store.hoverCol, this.handleHoverColChange);
     },
     methods: {
         manageMouseMove(e) {
@@ -43,14 +45,19 @@ export default {
             return x * (1 - a) + y * a
         },
         handleHoverChange(newVal) {
-            this.size = newVal ? '100px' : '40px';
-            this.colorStyle = newVal ? 'white' : 'gray';
+            this.size = newVal ? '100px' : '60px';
+            this.colorStyle = newVal ? 'var(--apple-gray-300)' : 'var(--apple-gray-900)';
+        },
+        handleHoverColChange(newVal) {
+            this.hoverCol = newVal;
+            if (store.isHovered) {
+                this.colorStyle = newVal;
+            }
         },
         beforeDestroy() {
             window.removeEventListener("mousemove", this.manageMouseMove);
         }
     },
-
 };
 </script>
 
@@ -64,8 +71,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: var(--apple-primary);
-    background-color: var(--apple-lighter);
+    background-color: var(--apple-gray-900);
     border-radius: 50%;
     mix-blend-mode: difference;
     z-index: 1000;

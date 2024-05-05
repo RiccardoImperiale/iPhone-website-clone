@@ -1,4 +1,5 @@
 <script>
+import { store } from '../store.js'
 import { animateImages, animateTitle, animateInfos, animateVideo } from '../assets/js/animations.js';
 
 export default {
@@ -13,16 +14,28 @@ export default {
         animateImages(images);
         animateInfos(infoText);
     },
+    methods: {
+        setIsHover(isHovered) {
+            store.isHovered = isHovered;
+        },
+        setIsHoverColor(isHovered, color) {
+            store.isHovered = isHovered;
+            store.hoverCol = color;
+        }
+    }
 };
 </script>
 
 <template>
     <section id="story">
         <div class="top container">
-            <div class="title" ref="title">Explore the full story.</div>
+            <div @mouseover="setIsHover(true)" @mouseleave="setIsHover(false)" class="title no_select" ref="title">
+                Explore the full story.</div>
         </div>
         <div class="bottom container-sm">
-            <div class="title">iPhone.<br>Forged in titanium.</div>
+            <div @mouseover="setIsHoverColor(true, 'white')"
+                @mouseleave="setIsHoverColor(false, 'var(--apple-gray-900)')" class="title no_select">
+                iPhone.<br>Forged in titanium.</div>
             <div class="slides">
                 <div class="video">
                     <video ref="video" autoplay muted playsInline>
@@ -37,15 +50,17 @@ export default {
                         <img class="image" src="/assets/images/explore2.jpg" alt="iPhone closeup">
                     </div>
                 </div>
-                <div class="bottom_text">
+                <div class="bottom_text no_select">
                     <div class="text">
-                        <p class="info_text">
+                        <p @mouseover="setIsHoverColor(true, 'white')"
+                            @mouseleave="setIsHoverColor(false, 'var(--apple-gray-900)')" class="info_text">
                             iPhone 15 Pro is <span>the first iPhone to feature an aerospace‑grade titanium design,
                             </span>using the same alloy that spacecraft use for missions to Mars.
                         </p>
                     </div>
                     <div class="text">
-                        <p class="info_text">
+                        <p @mouseover="setIsHoverColor(true, 'white')"
+                            @mouseleave="setIsHoverColor(false, 'var(--apple-gray-900)')" class="info_text">
                             Titanium has one of the best strength‑to‑weight ratios of any metal, making these our
                             <span>lightest Pro models ever</span>. You’ll notice the
                             moment you pick one up.
@@ -135,7 +150,6 @@ export default {
             display: flex;
             gap: 2rem;
             margin-top: 3rem;
-            /* align-items: flex-start; */
 
             .text {
                 padding-inline: 3rem;
@@ -154,7 +168,6 @@ export default {
 
                 & span {
                     color: var(--apple-lighter);
-
                 }
             }
         }
