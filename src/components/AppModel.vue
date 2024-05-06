@@ -85,8 +85,8 @@ const selectedSizeClass = computed(() => (size) => {
 </script>
 
 <template>
-    <section id="model" class="container">
-        <div class="top">
+    <section id="model">
+        <div class="top container">
             <div @mouseover="() => setIsHover(true)" @mouseleave="() => setIsHover(false)" class="title no_select"
                 ref="title">Take
                 a closer look.</div>

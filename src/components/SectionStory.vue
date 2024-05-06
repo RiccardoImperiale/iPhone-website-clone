@@ -102,6 +102,7 @@ export default {
             font-weight: 500;
             margin-bottom: 4rem;
             padding-left: 3rem;
+            width: 72%;
         }
 
         .video,

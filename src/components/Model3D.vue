@@ -45,5 +45,3 @@ const rotate = (direction) => {
         <TresDirectionalLight :position="[0, -10, 10]" :intensity="0.5" />
     </TresCanvas>
 </template>
-
-<style></style>
